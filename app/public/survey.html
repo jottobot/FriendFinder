@@ -200,7 +200,7 @@
   $(".submit").on("click", function (event) {
     event.preventDefault();
 
-    // Here we grab the form elements
+    // create the new friend object - represents a new friend survey data
     var newFriend = {
       name: $("#name").val(),
       photo: $("#photo").val(),
@@ -220,7 +220,12 @@
 
     console.log(newFriend);
 
-    // code to show     
+    $.post("/api/friends", userData, function (data) {
+      // // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+
+      // What is posted here?
+
+    });
 
 
 
