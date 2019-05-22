@@ -179,8 +179,8 @@
     <footer class="footer">
       <div class="container">
         <p>
-          <a href="/api/friends">API Table Link</a> |
-          <!-- <a href="/api/waitlist">Github Repo</a> -->
+          <a href="/api/friends">API Friends List</a> |
+          <a href="https://github.com/jottobot/FriendFinder">Github Repo</a>
       </div>
     </footer>
 
@@ -202,49 +202,27 @@
 
     // Here we grab the form elements
     var newFriend = {
-      "name": "Sarah",
-      "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
-      "scores": [
-        5,
-        1,
-        4,
-        4,
-        5,
-        1,
-        2,
-        5,
-        4,
-        1
+      name: $("#name").val(),
+      photo: $("#photo").val(),
+      scores: [
+        // 5,
+        // 1,
+        // 4,
+        // 4,
+        // 5,
+        // 1,
+        // 2,
+        // 5,
+        // 4,
+        // 1
       ]
     };
 
     console.log(newFriend);
 
-    // This line is the magic. It"s very similar to the standard ajax function we used.
-    // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-    // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-    // depending on if a tables is available or not.
+    // code to show     
 
-    // $.post("/api/tables", newReservation,
-    //   function (data) {
 
-    //     // If a table is available... tell user they are booked.
-    //     if (data) {
-    //       alert("Yay! You are officially booked!");
-    //     }
-
-    //     // If a table is available... tell user they on the waiting list.
-    //     else {
-    //       alert("Sorry you are on the wait list");
-    //     }
-
-    //     // Clear the form when submitting
-    //     $("#reserve-name").val("");
-    //     $("#reserve-phone").val("");
-    //     $("#reserve-email").val("");
-    //     $("#reserve-unique-id").val("");
-
-    //   });
 
   });
 

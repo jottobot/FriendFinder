@@ -4,7 +4,7 @@
 var friendsArray = [
   {
     "name":"Sarah",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo":"https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwjUh8Sy9q3iAhUBOn0KHcoIAT4QjRx6BAgBEAU&url=https%3A%2F%2Fpngtree.com%2Ffreepng%2Fcartoon-girl_1273131.html&psig=AOvVaw15YoZ3oIoGOAnhBDqc_t0c&ust=1558572829035299",
     "scores":[
         5,
         1,
