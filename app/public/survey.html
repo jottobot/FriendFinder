@@ -50,7 +50,7 @@
           <h3>Questions</h3>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Weekends are meant for sleeping till noon.</label>
+            <label for="q1">Weekends are meant for sleeping till noon.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -62,7 +62,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Vanilla ice cream is the best flavor.</label>
+            <label for="q2">Vanilla ice cream is the best flavor.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -74,7 +74,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Reading is better than watching movies.</label>
+            <label for="q3">Reading is better than watching movies.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -86,7 +86,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">You find yourself hiking more than staying in.</label>
+            <label for="q4">You find yourself hiking more than staying in.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -98,7 +98,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">It is hard for you to speak up in large groups of people.</label>
+            <label for="q5">It is hard for you to speak up in large groups of people.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -110,7 +110,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Truth is always more important than hurting peoples feelings.</label>
+            <label for="q6">Truth is always more important than hurting peoples feelings.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -122,7 +122,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">You have considered being vegan or gluten free.</label>
+            <label for="q7">You have considered being vegan or gluten free.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -134,7 +134,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Self care is more important than spending time with friends.</label>
+            <label for="q8">Self care is more important than spending time with friends.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -146,7 +146,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Netflix binging is greater than classic movies.</label>
+            <label for="q9">Netflix binging is greater than classic movies.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -158,7 +158,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleFormControlSelect1">You rarely do stuff to get out of your comfort zone.</label>
+            <label for="q10">You rarely do stuff to get out of your comfort zone.</label>
             <select class="form-control" id="exampleFormControlSelect1">
               <option>Select an Option</option>
               <option>1 (Strongly Disagree)</option>
@@ -175,6 +175,26 @@
       </div>
     </div>
 
+    <!-- Modal to display results -->
+    <div class="modal" tabindex="-1" role="dialog" id="results">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Your New Best Friend!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2 id="newfriend"></h2>
+            <img id="pic" src="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="container">
@@ -186,49 +206,46 @@
 
   </div>
 
-</body>
+  <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
+  <script type="text/javascript">
+    // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
 
-</html>
+    $(".submit").on("click", function (event) {
+      event.preventDefault();
 
-<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
-<script type="text/javascript">
-  // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
-  // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
-  // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
-  // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+      // create the new friend object - represents a new friend survey data
+      var newFriend = {
+        name: $("#name").val(),
+          photo: $("#photo").val(),
+          scores: [
+            $("#q1").val(),
+            $("#q2").val(),
+            $("#q3").val(),
+            $("#q4").val(),
+            $("#q5").val(),
+            $("#q6").val(),
+            $("#q7").val(),
+            $("#q8").val(),
+            $("#q9").val(),
+            $("#q10").val()
+          ]
+        };
 
-  $(".submit").on("click", function (event) {
-    event.preventDefault();
+      $.post("/api/friends", newFriend, function (data) {
+        // // Grab the result from the AJAX post so that the best match's name and photo are displayed.
 
-    // create the new friend object - represents a new friend survey data
-    var newFriend = {
-      name: $("#name").val(),
-      photo: $("#photo").val(),
-      scores: [
-        // 5,
-        // 1,
-        // 4,
-        // 4,
-        // 5,
-        // 1,
-        // 2,
-        // 5,
-        // 4,
-        // 1
-      ]
-    };
+        $("#newfriend").text(data.name);
+        $("#pic").attr("src", data.photo);
+        $("#results").modal("toggle");
 
-    console.log(newFriend);
+      });
 
-    $.post("/api/friends", userData, function (data) {
-      // // Grab the result from the AJAX post so that the best match's name and photo are displayed.
 
-      // What is posted here?
 
     });
 
+  </script>
 
+</body>
 
-  });
-
-</script>
+</html>
