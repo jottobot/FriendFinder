@@ -11,29 +11,57 @@ module.exports = function (app) {
   // API POST Requests, when user POSTS (submits) data to server
   app.post('/api/friends', function (req, res) {
 
-    var newUser = req.body;
     var diff = 0;
-    var scoreToBeat = 50;
-    for (var i = 0; i < friends.length; i++) {
-      // scores of a friend in the database
-      var friendScores = friends[i].scores;
-      // scores of the new friend that just submitted the survey
-      var newFriendScores = newUser.scores;
-      for (var j = 0; j < friendScores.length; j++) {
-        if (friendScores[j] > newFriendScores[j]) {
-          diff += friendScores[j] - newFriendScores[j];
-        } else {
-          diff += newFriendScores[j] - friendScores[j];
-        }
-        if (diff < scoreToBeat) {
-          scoreToBeat = diff;
-          match = friends[i];
-        }
-      }
+    var bestFriend = {
+      name: "",
+      photo: "",
+      friendDiff: 100,
     }
 
-    friends.push(newUser);
-    res.json(match);
+    var newUser = req.body;
+    var userName = newUser.name;
+    var userScores = newUser.scores;
+
+    var b = userScores.map(function(item) {
+      return parseInt(item, 10)
+    });
+    newUser = {
+      name: req.body.name,
+      photo: req.body.photo,
+      scores: b
+    };
+
+    console.log("Name: " + userName + " and score: " + userScores);
+
+    var sum = best.reduce((a, b) => a + b, 0);
+    console.log("Sum of users score is " + sum);
+    console.log("Best friend match difference is " + bestFriend.friendDiff);
+
+    for (var i = 0; i < friends.length; i++) {
+      diff = 0;
+      console.log(friends[i].name);
+      console.log("Total diff is " + diff);
+      console.log("Best friend match difference is " + bestFriend.friendDiff);
+
+      var bestFriendScore = friends[i].scores.reduce((a, b) => a + b, 0);
+      console.log("Total friend score is " + bestFriendScore);
+      diff += Math.abs(sum - bestFriendScore);
+      console.log(diff);
+
+      if (diff <= bestFriend.friendDiff) {
+        bestFriend.name = friends[i].name;
+        bestFriend.photo = friends[i].photo;
+        bestFriend.friendDiff = diff;
+      }
+
+      console.log(newUser);
+      console.log(bestFriend);
+
+
+      friends.push(newUser);
+      res.json(bestFriend);
+
+    }
 
   });
 };
