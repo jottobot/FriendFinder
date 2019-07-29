@@ -1,0 +1,11 @@
+.image {
+  margin: 0 auto;
+  width: 400px;
+  height: auto;
+  align-content: center;
+  margin-bottom: 100px;
+}
+
+#submitbutton {
+  margin-bottom: 20px;
+}

@@ -23,10 +23,10 @@ var friends = [
     photo: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.worldatlas.com%2Fr%2Fw728-h425-c728x425%2Fupload%2F43%2F55%2F6c%2Fshutterstock-174856256.jpg&imgrefurl=https%3A%2F%2Fwww.worldatlas.com%2Farticles%2Fthe-world-s-most-common-types-of-apples.html&docid=ilDEI2vLeStdkM&tbnid=PlhXguF3aIDhLM%3A&vet=10ahUKEwiFzOG8v43jAhUBpJ4KHTKAB74QMwh4KAIwAg..i&w=729&h=425&bih=624&biw=1205&q=picture%20of%20apples&ved=0ahUKEwiFzOG8v43jAhUBpJ4KHTKAB74QMwh4KAIwAg&iact=mrc&uact=8",
     scores: [
       1,
-      2,
-      5,
-      4,
-      5,
+      1,
+      1,
+      1,
+      1,
       1,
       2,
       5,
@@ -39,12 +39,12 @@ var friends = [
     photo: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.shutterstock.com%2Fimage-photo%2Fpiece-cheese-isolated-260nw-350655557.jpg&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fcheese&docid=_ViiD_258ppRdM&tbnid=UvGG9Nt1VBJaYM%3A&vet=10ahUKEwj8uu3Qv43jAhUTvZ4KHcGjDawQMwiQASgBMAE..i&w=360&h=280&bih=624&biw=1205&q=picture%20ofcheese&ved=0ahUKEwj8uu3Qv43jAhUTvZ4KHcGjDawQMwiQASgBMAE&iact=mrc&uact=8",
     scores: [
       5,
+      3,
+      3,
       1,
-      4,
-      1,
-      2,
-      5,
-      4,
+      3,
+      3,
+      3,
       5,
       4,
       1
@@ -56,13 +56,13 @@ var friends = [
     scores: [
       2,
       1,
-      4,
-      4,
+      2,
+      2,
       1,
       2,
-      5,
-      4,
-      4,
+      2,
+      2,
+      2,
       1
     ]
   },
@@ -76,10 +76,10 @@ var friends = [
       5,
       5,
       1,
-      2,
-      1,
-      4,
-      1
+      5,
+      5,
+      5,
+      5
     ]
   }
 ];
