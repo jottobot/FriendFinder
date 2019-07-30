@@ -10,34 +10,40 @@ module.exports = function(app) {
 
   // API POST Requests, when user POSTS (submits) data to server
   app.post('/api/friends', function(req, res) {
-    var diff = 0;
-    var bestFriend = {
-      name: '',
-      photo: '',
-      friendDiff: 45
-    };
+    console.log(req.body.scores);
+
+    // Receive user details (name, photo, scores)
     var newUser = req.body;
-    var userScores = newUser.scores;
-    var b = userScores.map(function(item) {
-      return parseInt(item, 10);
-    });
-    newUser = {
-      name: req.body.name,
-      photo: req.body.photo,
-      scores: b
-    };
-    var sum = b.reduce((a, b) => a + b, 0);
-    for (var i = 0; i < friends.length; i++) {
-      diff = 0;
-      var bestFriendScore = friends[i].scores.reduce((a, b) => a + b, 0);
-      diff += Math.abs(sum - bestFriendScore);
-      if (diff <= bestFriend.friendDiff) {
-        bestFriend.name = friends[i].name;
-        bestFriend.photo = friends[i].photo;
-        bestFriend.friendDiff = diff;
-      }
-      friends.push(newUser);
-      res.json(bestFriend);
+
+    // parseInt for scores
+    for(var i = 0; i < newUser.scores.length; i++) {
+      newUser.scores[i] = parseInt(newUser.scores[i]);
     }
+
+    // default friend match is the first friend but result will be whoever has the minimum difference in scores
+    var diff = 0;
+    var friendDiff = 40;
+
+    // in this for-loop, start off with a zero difference and compare the user and the ith friend scores, one set at a time
+    //  whatever the difference is, add to the total difference
+    for(var i = 0; i < friends.length; i++) {
+      var totalDifference = 0;
+      for(var j = 0; j < friends[i].scores.length; j++) {
+        var difference = Math.abs(newUser.scores[j] - friends[i].scores[j]);
+        totalDifference += difference;
+      }
+
+      // if there is a new minimum, change the best friend index and set the new minimum for next iteration comparisons
+      if(totalDifference < friendDiff) {
+        diff = i;
+        friendDiff = totalDifference;
+      }
+    }
+
+    // after finding match, add user to friend array
+    friends.push(newUser);
+
+    // send back to browser the best friend match
+    res.json(friends[diff]);
   });
 };
